@@ -81,6 +81,16 @@ class Sender
     }
 
     /**
+     * 수신자휴대전화번호를 가져온다.
+     *
+     * @return string $cellphone
+     */
+    public function getCellphone(): string
+    {
+        return $this->_cellphone;
+    }
+
+    /**
      * 발송번호를 설정한다.
      *
      * @param ?string $cellphone 발송휴대전화번호
@@ -95,13 +105,23 @@ class Sender
     /**
      * 본문내용을 설정한다.
      *
-     * @param mixed $content 본문
+     * @param string $content 본문
      * @return \modules\sms\Sender $this
      */
-    public function setContent(mixed $content): \modules\sms\Sender
+    public function setContent(string $content): \modules\sms\Sender
     {
         $this->_content = $content;
         return $this;
+    }
+
+    /**
+     * 본문내용을 가져온다.
+     *
+     * @return string $content
+     */
+    public function getContent(): string
+    {
+        return $this->_content;
     }
 
     /**
