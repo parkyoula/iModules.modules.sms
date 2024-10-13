@@ -84,7 +84,6 @@
                 "cellphone": "index",
                 "component_type,component_name": "index"
             },
-            "auto_increment": "idx",
             "comment": "아이모듈 SMS 메시지"
         }
     }
