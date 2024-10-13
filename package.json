@@ -1,0 +1,91 @@
+{
+    "id": "tools.moimz.imodules.modules.sms",
+    "icon": "xi xi-tablet",
+    "title": {
+        "ko": "SMS"
+    },
+    "version": "4.0.0",
+    "description": {
+        "ko": "SMS발송을 위한 모듈입니다."
+    },
+    "author": {
+        "name": "Arzz",
+        "email": "arzz@arzz.com"
+    },
+    "homepage": "https://www.imodules.io",
+    "versionChecker": "https://api.moimz.com/download/latest",
+    "dependencies": {
+        "core": "4.0.0"
+    },
+    "language": "ko",
+    "admin": true,
+    "databases": {
+        "messages": {
+            "columns": {
+                "message_id": {
+                    "type": "char",
+                    "length": 36,
+                    "comment": "SMS고유값"
+                },
+                "member_id": {
+                    "type": "int",
+                    "comment": "수신자회원고유값"
+                },
+                "cellphone": {
+                    "type": "varchar",
+                    "length": 20,
+                    "comment": "수신자휴대전화번호"
+                },
+                "name": {
+                    "type": "varchar",
+                    "length": 100,
+                    "is_null": true,
+                    "comment": "수신자명"
+                },
+                "component_type": {
+                    "type": "varchar",
+                    "length": 10,
+                    "comment": "SMS를 전송한 컴포넌트종류"
+                },
+                "component_name": {
+                    "type": "varchar",
+                    "length": 50,
+                    "comment": "SMS를 전송한 컴포넌트명"
+                },
+                "content": {
+                    "type": "text",
+                    "comment": "발송메시지"
+                },
+                "sended_cellphone": {
+                    "type": "varchar",
+                    "length": 20,
+                    "is_null": true,
+                    "comment": "발송자휴대전화번호"
+                },
+                "sended_at": {
+                    "type": "int",
+                    "comment": "발송일시"
+                },
+                "status": {
+                    "type": "enum",
+                    "length": "'TRUE','FALSE'",
+                    "default": "FALSE",
+                    "comment": "발송상태"
+                },
+                "response": {
+                    "type": "text",
+                    "is_null": true,
+                    "comment": "발송응답내용"
+                }
+            },
+            "indexes": {
+                "message_id": "primary_key",
+                "member_id": "index",
+                "cellphone": "index",
+                "component_type,component_name": "index"
+            },
+            "auto_increment": "idx",
+            "comment": "아이모듈 SMS 메시지"
+        }
+    }
+}
