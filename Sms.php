@@ -29,4 +29,15 @@ class Sms extends \Module
     {
         return new \modules\sms\Sender($component);
     }
+
+    /**
+     * 한글인 경우 2글자, 그 외 1글자로 계산한 한국 SMS 규격에 따른 본문내용 길이를 가져온다.
+     *
+     * @param string $content 본문내용
+     * @return int $length 길이
+     */
+    public function getContentLength(string $content): int
+    {
+        return strlen(iconv('UTF-8', 'CP949//IGNORE', $content));
+    }
 }
