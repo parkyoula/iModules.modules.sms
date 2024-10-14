@@ -103,6 +103,16 @@ class Sender
     }
 
     /**
+     * 발송번호를 설정한다.
+     *
+     * @return ?string $from
+     */
+    public function getFrom(): ?string
+    {
+        return $this->_from;
+    }
+
+    /**
      * 본문내용을 설정한다.
      *
      * @param string $content 본문
