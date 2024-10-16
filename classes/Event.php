@@ -2,15 +2,15 @@
 /**
  * 이 파일은 아이모듈 SMS모듈의 일부입니다. (https://www.imodules.io)
  *
- * SMS모듈의 이벤트목록을 정의한다.
+ * SMS모듈의 이벤트를 정의한다.
  *
  * @file /modules/sms/classes/Event.php
  * @author Arzz <arzz@arzz.com>
  * @license MIT License
- * @modified 2024. 10. 14.
+ * @modified 2024. 10. 16.
  */
 namespace modules\sms;
-class Event extends \Listeners
+class Event extends \Event
 {
     /**
      * SMS를 전송할 때 발생한다.
