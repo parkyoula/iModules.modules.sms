@@ -157,7 +157,7 @@ class Sender
          * SMS 전송 플러그인을 이용하여 SMS 를 발송한다.
          */
         $success =
-            \Event::fireEvent($mSms, 'send', [$this, $sended_at], 'NOTNULL') ??
+            \Events::fireEvent($mSms, 'send', [$this, $sended_at], 'NOTNULL') ??
             $mSms->getErrorText('NOT_FOUND_SENDER_PLUGIN');
 
         $message_id = \UUID::v1($this->_cellphone);
