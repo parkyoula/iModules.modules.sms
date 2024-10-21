@@ -1,4 +1,20 @@
 {
+    "admin": {
+        "contexts": {
+            "messages": "SMS"
+        },
+        "columns": {
+            "receiver": "수신자",
+            "receiveNumber": "수신번호",
+            "sender": "발신자",
+            "senderNumber": "발신번호",
+            "content": "문자내용",
+            "date": "전송일자",
+            "status": "전송결과",
+            "type": "전송타입"
+        },
+        "keyword": "수신자/발신자"
+    },
     "errors": {
         "NOT_FOUND_SENDER_PLUGIN": "SMS를 전송할 수 있는 플러그인을 찾을 수 없습니다."
     }

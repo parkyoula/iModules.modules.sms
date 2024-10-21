@@ -1,0 +1,51 @@
+/**
+ * 이 파일은 SMS 모듈의 일부입니다. (https://www.coursemos.co.kr)
+ *
+ * SMS 모듈의 관리자 스타일시트를 정의한다.
+ *
+ * @file /modules/naddle/sms/admin/styles/Sms.css
+ * @author youlapark <youlapark@naddle.net>
+ * @license MIT License
+ * @modified 2024. 10. 15.
+ */
+div[data-component='messages-context'][data-type='panel'][data-role='tabpanel'] {
+    div[data-role='content'] {
+        div[data-type='panel'][data-role='grid'] {
+            div[data-role='body'] {
+                > div[data-role='rows'] {
+                    > div[data-role='row'] {
+                        > div[data-role='column'] {
+                            position: relative;
+
+                            &.TRUE {
+                                color: var(--aui-color-accent-700);
+
+                                /**
+                                &::after {
+                                    content: '\e404';
+                                    position: absolute;
+                                    top: calc(var(--aui-component-gap) / 2 + 1px);
+                                    right: -2px;
+                                    width: calc(var(--aui-component-height-default) - var(--aui-component-gap) * 2 - 2px);
+                                    height: calc(var(--aui-component-height-default) - var(--aui-component-gap) * 2 - 2px);
+                                    line-height: calc(var(--aui-component-height-default) - var(--aui-component-gap) * 2 - 2px);
+                                    display: block;
+                                    background: var(--aui-color-accent-500);
+                                    border-radius: 50%;
+                                    font-family: moimz;
+                                    color: var(--aui-color-accent-backward-500);
+                                    font-size: 11px;
+                                }
+                                */
+                            }
+
+                            &.FALSE {
+                                color: var(--aui-color-danger-600);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
