@@ -43,6 +43,11 @@ class Sender
     private ?string $_from = null;
 
     /**
+     * @var string $_type 발송타입
+     */
+    private string $_type;
+
+    /**
      * SMS 전송자 클래스를 정의한다.
      *
      * @param \Component $component 알림을 전송하는 컴포넌트 객체
@@ -145,6 +150,26 @@ class Sender
     }
 
     /**
+     * 발송타입을 가져온다.
+     *
+     * @return string $type 발송타입[SMS,LMS,KAKAO]
+     */
+    public function getType(): string
+    {
+        return $this->_type;
+    }
+
+    /**
+     * 발송타입을 설정한다. [SMS, LMS, KAKAO]
+     *
+     * @param string $type 발송타입[SMS,LMS,KAKAO]
+     */
+    public function setType(string $type): void
+    {
+        $this->_type = $type;
+    }
+
+    /**
      * SMS를 전송한다.
      *
      * @param ?int $sended_at - 전송시각(NULL 인 경우 현재시각)
@@ -170,6 +195,15 @@ class Sender
             \Events::fireEvent($mSms, 'send', [$this, $sended_at], 'NOTNULL') ??
             $mSms->getErrorText('NOT_FOUND_SENDER_PLUGIN');
 
+        /**
+         * 설정된 타입이 존재하지 않을 경우 문자열의 길이에 따라 $type을 LMS, SMS로 지정한다.
+         */
+        $type = $this->getType();
+        if ($this->getType() === null) {
+            $type = $mSms->getContentLength($this->_content) > 80 ? 'LMS' : 'SMS';
+            $this->setType($type);
+        }
+
         $message_id = \UUID::v1($this->_cellphone);
         $mSms
             ->db()
@@ -185,6 +219,7 @@ class Sender
                 'sended_at' => $sended_at,
                 'status' => $success === true ? 'TRUE' : 'FALSE',
                 'response' => is_bool($success) == false ? \Format::toJson($success) : null,
+                'type' => $type,
             ])
             ->execute();
 
