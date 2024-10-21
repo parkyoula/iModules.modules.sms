@@ -79,7 +79,7 @@
                 },
                 "type": {
                     "type": "enum",
-                    "length": "'SMS','LMS'",
+                    "length": "'SMS','LMS', 'KAKAO'",
                     "default": "SMS",
                     "comment": "발송상태"
                 }
