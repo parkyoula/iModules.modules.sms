@@ -31,6 +31,46 @@ class Sms extends \Module
     }
 
     /**
+     * 휴대전화번호 구조체를 가져온다.
+     *
+     * @param string $cellphone 휴대전화번호
+     * @param ?string $name 이름
+     * @param ?int $member_id 회원고유값
+     * @return \modules\sms\dtos\Cellphone $cellphone 휴대전화번호 구조체
+     */
+    public function getCellphone(
+        string $cellphone,
+        ?string $name = null,
+        ?int $member_id = null
+    ): \modules\sms\dtos\Cellphone {
+        return new \modules\sms\dtos\Cellphone($cellphone, $name, $member_id);
+    }
+
+    /**
+     * 회원정보를 통해 휴대전화번호 구조체를 가져온다.
+     *
+     * @param int $member_id 회원고유값
+     * @return \modules\sms\dtos\Cellphone $cellphone 휴대전화번호 구조체
+     */
+    public function getCellphoneFromMember(int $member_id): \modules\sms\dtos\Cellphone
+    {
+        /**
+         * @var \modules\member\Member $mMember
+         */
+        $mMember = \Modules::get('member');
+        $member = $mMember->getMember($member_id);
+        if ($member->getId() === 0) {
+            \ErrorHandler::print($this->error('NOT_FOUND_MEMBER'));
+        }
+
+        return new \modules\sms\dtos\Cellphone(
+            $member->getCellphone(),
+            $member->getDisplayName(false),
+            $member->getId()
+        );
+    }
+
+    /**
      * 한글인 경우 2글자, 그 외 1글자로 계산한 한국 SMS 규격에 따른 본문내용 길이를 가져온다.
      *
      * @param string $content 본문내용

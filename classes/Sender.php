@@ -7,7 +7,7 @@
  * @file /modules/sms/classes/Sender.php
  * @author Arzz <arzz@arzz.com>
  * @license MIT License
- * @modified 2024. 10. 13.
+ * @modified 2024. 10. 21.
  */
 namespace modules\sms;
 class Sender
@@ -18,19 +18,9 @@ class Sender
     private \Component $_component;
 
     /**
-     * @var int $_member_id 수신자 회원고유값
+     * @var ?\modules\sms\dtos\Cellphone $_to 수신자휴대전화번호
      */
-    private int $_member_id;
-
-    /**
-     * @var ?string $_cellphone 수신자 휴대전화번호
-     */
-    private ?string $_cellphone;
-
-    /**
-     * @var ?string $_name 수신자명
-     */
-    private ?string $_name;
+    private ?\modules\sms\dtos\Cellphone $_to;
 
     /**
      * @var string $_content 본문내용
@@ -38,14 +28,19 @@ class Sender
     private string $_content;
 
     /**
-     * @var ?string $_from 발송자휴대전화번호
+     * @var ?\modules\sms\dtos\Cellphone $_from 발송자휴대전화번호
      */
-    private ?string $_from = null;
+    private ?\modules\sms\dtos\Cellphone $_from = null;
 
     /**
-     * @var string $_type 발송타입
+     * @var ?string $_type 발송타입
      */
-    private string $_type;
+    private ?string $_type = null;
+
+    /**
+     * @var mixed $_extras SMS추가데이터
+     */
+    private mixed $_extras = null;
 
     /**
      * SMS 전송자 클래스를 정의한다.
@@ -70,59 +65,44 @@ class Sender
     /**
      * 수신자를 설정한다.
      *
-     * @param int $member_id 수신자 회원고유값 (0 인 경우 비회원으로 휴대전화번호를 추가로 설정해주어야 한다.)
-     * @param ?string $cellphone 휴대전화번호
-     * @param ?string $name 수신자명
+     * @param \modules\sms\dtos\Cellphone $cellphone 수신자휴대전화번호객체
      * @return \modules\sms\Sender $this
      */
-    public function setTo(int $member_id, ?string $cellphone = null, ?string $name = null): \modules\sms\Sender
+    public function setTo(\modules\sms\dtos\Cellphone $to): \modules\sms\Sender
     {
-        if ($member_id > 0 && ($cellphone !== null || $name !== null)) {
-            /**
-             * @var \modules\member\Member $mMember
-             */
-            $mMember = \Modules::get('member');
-            $member = $mMember->getMember($member_id);
-
-            $name ??= $member->getName();
-            $cellphone ??= $member->getCellphone();
-        }
-
-        $this->_member_id = $member_id;
-        $this->_cellphone = $cellphone;
-        $this->_name = $name;
+        $this->_to = $to;
 
         return $this;
     }
 
     /**
-     * 수신자휴대전화번호를 가져온다.
+     * 수신자를 가져온다.
      *
-     * @return string $cellphone
+     * @return ?\modules\sms\dtos\Cellphone $to
      */
-    public function getCellphone(): string
+    public function getTo(): ?\modules\sms\dtos\Cellphone
     {
-        return $this->_cellphone;
+        return $this->_to;
     }
 
     /**
      * 발송번호를 설정한다.
      *
-     * @param ?string $cellphone 발송휴대전화번호
+     * @param \modules\sms\dtos\Cellphone $from 발송휴대전화번호객체
      * @return \modules\sms\Sender $this
      */
-    public function setFrom(?string $cellphone): \modules\sms\Sender
+    public function setFrom(\modules\sms\dtos\Cellphone $from): \modules\sms\Sender
     {
-        $this->_from = $cellphone;
+        $this->_from = $from;
         return $this;
     }
 
     /**
-     * 발송번호를 설정한다.
+     * 발송번호를 가져온다.
      *
-     * @return ?string $from
+     * @return ?\modules\sms\dtos\Cellphone $from
      */
-    public function getFrom(): ?string
+    public function getFrom(): ?\modules\sms\dtos\Cellphone
     {
         return $this->_from;
     }
@@ -150,23 +130,47 @@ class Sender
     }
 
     /**
+     * 추가데이터를 설정한다.
+     *
+     * @param mixed $extras
+     * @return \modules\sms\Sender $this
+     */
+    public function setExtras(mixed $extras): \modules\sms\Sender
+    {
+        $this->_extras = $extras;
+        return $this;
+    }
+
+    /**
+     * 추가데이터를 가져온다.
+     *
+     * @return mixed $extras
+     */
+    public function getExtras(): mixed
+    {
+        return $this->_extras;
+    }
+
+    /**
+     * 발송타입을 설정한다.
+     *
+     * @param string $type 발송타입
+     * @return \modules\sms\Sender $this
+     */
+    public function setType(string $type): \modules\sms\Sender
+    {
+        $this->_type = $type;
+        return $this;
+    }
+
+    /**
      * 발송타입을 가져온다.
      *
-     * @return string $type 발송타입[SMS,LMS,KAKAO]
+     * @return string $type 발송타입
      */
     public function getType(): string
     {
         return $this->_type;
-    }
-
-    /**
-     * 발송타입을 설정한다. [SMS, LMS, KAKAO]
-     *
-     * @param string $type 발송타입[SMS,LMS,KAKAO]
-     */
-    public function setType(string $type): void
-    {
-        $this->_type = $type;
     }
 
     /**
@@ -177,7 +181,7 @@ class Sender
      */
     public function send(?int $sended_at = null): bool
     {
-        if (isset($this->_member_id) == false || isset($this->_content) == false) {
+        if (isset($this->_to) == false || isset($this->_content) == false) {
             return false;
         }
 
@@ -204,22 +208,22 @@ class Sender
             $this->setType($type);
         }
 
-        $message_id = \UUID::v1($this->_cellphone);
+        $message_id = \UUID::v1($this->_to->getCellphone());
         $mSms
             ->db()
             ->insert($mSms->table('messages'), [
                 'message_id' => $message_id,
-                'member_id' => $this->_member_id,
-                'cellphone' => $this->_cellphone,
-                'name' => $this->_name,
+                'type' => $type,
+                'member_id' => $this->_to->getMemberId(),
+                'cellphone' => $this->_to->getCellphone(),
+                'name' => $this->_to->getName(),
                 'component_type' => $this->_component->getType(),
                 'component_name' => $this->_component->getName(),
                 'content' => $this->_content,
-                'sended_cellphone' => $this->_from,
+                'sended_cellphone' => $this->_from->getCellphone(),
                 'sended_at' => $sended_at,
                 'status' => $success === true ? 'TRUE' : 'FALSE',
                 'response' => is_bool($success) == false ? \Format::toJson($success) : null,
-                'type' => $type,
             ])
             ->execute();
 

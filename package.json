@@ -27,6 +27,12 @@
                     "length": 36,
                     "comment": "SMS고유값"
                 },
+                "type": {
+                    "type": "varchar",
+                    "length": 10,
+                    "default": "SMS",
+                    "comment": "발송종류"
+                },
                 "member_id": {
                     "type": "int",
                     "comment": "수신자회원고유값"
@@ -76,12 +82,6 @@
                     "type": "text",
                     "is_null": true,
                     "comment": "발송응답내용"
-                },
-                "type": {
-                    "type": "enum",
-                    "length": "'SMS','LMS', 'KAKAO'",
-                    "default": "SMS",
-                    "comment": "발송상태"
                 }
             },
             "indexes": {
