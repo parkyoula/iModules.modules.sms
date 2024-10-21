@@ -53,6 +53,16 @@ class Sender
     }
 
     /**
+     * 컴포넌트를 호출한다.
+     *
+     * @param \Component $component 알림을 전송하는 컴포넌트 객체
+     */
+    public function getComponent()
+    {
+        return $this->_component;
+    }
+
+    /**
      * 수신자를 설정한다.
      *
      * @param int $member_id 수신자 회원고유값 (0 인 경우 비회원으로 휴대전화번호를 추가로 설정해주어야 한다.)
