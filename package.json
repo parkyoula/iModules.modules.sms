@@ -76,6 +76,12 @@
                     "type": "text",
                     "is_null": true,
                     "comment": "발송응답내용"
+                },
+                "type": {
+                    "type": "enum",
+                    "length": "'SMS','LMS', 'KAKAO'",
+                    "default": "SMS",
+                    "comment": "발송상태"
                 }
             },
             "indexes": {
