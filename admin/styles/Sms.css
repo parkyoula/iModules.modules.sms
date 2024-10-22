@@ -8,7 +8,7 @@
  * @license MIT License
  * @modified 2024. 10. 15.
  */
-div[data-component='messages-context'][data-type='panel'][data-role='tabpanel'] {
+div[data-component='messages-context'][data-type='panel'][data-role='panel'] {
     div[data-role='content'] {
         div[data-type='panel'][data-role='grid'] {
             div[data-role='body'] {
