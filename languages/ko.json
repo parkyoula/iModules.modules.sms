@@ -1,5 +1,10 @@
 {
     "admin": {
+        "scopes": {
+            "context": "SMS관리",
+            "message": "메세지관리",
+            "view": "메세지조회"
+        },
         "contexts": {
             "messages": "SMS관리"
         },
