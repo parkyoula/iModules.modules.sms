@@ -1,7 +1,7 @@
 {
     "admin": {
         "contexts": {
-            "messages": "SMS"
+            "messages": "SMS관리"
         },
         "columns": {
             "receiver": "수신자",
@@ -13,7 +13,34 @@
             "status": "전송결과",
             "type": "전송타입"
         },
-        "keyword": "수신자/발신자"
+        "keyword": "수신자/발신자",
+        "filter": {
+            "types": {
+                "KAKAO": "알림톡"
+            },
+            "status": {
+                "TRUE": "성공",
+                "FALSE": "실패"
+            }
+        },
+        "messages": {
+            "show": {
+                "title": "메세지 상새보기",
+                "sms_info": "문자 내역",
+                "sended_at": "전송시간",
+                "content": "문자내용",
+                "type": "발송타입",
+                "status": "성공여부",
+                "receiver_info": "수신자 기본정보",
+                "receiver": "수신자",
+                "receive_number": "수신번호",
+                "sender": "발신자",
+                "sender_number": "발신번호"
+            }
+        },
+        "buttons": {
+            "close": "닫기"
+        }
     },
     "errors": {
         "NOT_FOUND_SENDER_PLUGIN": "SMS를 전송할 수 있는 플러그인을 찾을 수 없습니다."
