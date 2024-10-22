@@ -223,7 +223,7 @@ class Sender
                 'component_type' => $this->_component->getType(),
                 'component_name' => $this->_component->getName(),
                 'sended_cellphone' => $from->getCellphone(),
-                'sended_at' => $sended_at, // 전송시각
+                'sended_at' => $sended_at,
                 'status' => $success === true ? 'TRUE' : 'FALSE',
                 'response' => is_bool($success) == false ? \Format::toJson($success) : null,
                 'content' => $this->getContent(),
