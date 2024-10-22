@@ -39,7 +39,6 @@ Admin.ready(async () => {
                 layout: 'fit',
                 border: false,
                 flex: 1,
-                selection: { selectable: true, type: 'check', multiple: false },
                 store: new Aui.Store.Remote({
                     url: me.getProcessUrl('messages'),
                     primaryKeys: ['message_id'],
