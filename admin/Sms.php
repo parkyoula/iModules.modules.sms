@@ -59,7 +59,7 @@ class Sms extends \modules\admin\admin\Component
 
         $scopes[] = \modules\admin\dtos\Scope::init($this)->setScope(
             'messages',
-            $this->getText('admin.scopes.message')->addChild('view', $this->getText('admin.scopes.view'))
+            $this->getText('admin.scopes.message')
         );
 
         return $this->setScopes($scopes);
