@@ -40,6 +40,9 @@ namespace modules {
                                                         new Aui.Form.Field.Display({
                                                             label: this.printText('admin.messages.show.sended_at'),
                                                             name: 'sended_at',
+                                                            renderer: (value) => {
+                                                                return Format.date('Y.m.d(D) H:i:s', value);
+                                                            },
                                                         }),
                                                         new Aui.Form.Field.TextArea({
                                                             label: this.printText('admin.messages.show.content'),
