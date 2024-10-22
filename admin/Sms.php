@@ -25,7 +25,7 @@ class Sms extends \modules\admin\admin\Component
             $contexts[] = \modules\admin\dtos\Context::init($this)
                 ->setContext('messages')
                 ->setDefaultFolder(false)
-                ->setTitle('SMS관리', 'xi xi-presentation', 1);
+                ->setTitle('SMS관리', 'xi xi-letter', 1);
         }
 
         return $contexts;
