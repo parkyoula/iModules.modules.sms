@@ -7,7 +7,7 @@
  * @file /modules/sms/admin/Sms.php
  * @author youlapark <youlapark@naddle.net>
  * @license MIT License
- * @modified 2024. 10. 15.
+ * @modified 2024. 10. 22.
  */
 namespace modules\sms\admin;
 class Sms extends \modules\admin\admin\Component
@@ -25,7 +25,7 @@ class Sms extends \modules\admin\admin\Component
             $contexts[] = \modules\admin\dtos\Context::init($this)
                 ->setContext('messages')
                 ->setDefaultFolder(false)
-                ->setTitle('SMS관리', 'xi xi-letter', 1);
+                ->setTitle($this->getText('admin.scopes.context'), 'xi xi-letter', 1);
         }
 
         return $contexts;
@@ -57,7 +57,10 @@ class Sms extends \modules\admin\admin\Component
     {
         $scopes = [];
 
-        $scopes[] = \modules\admin\dtos\Scope::init($this)->setScope('messages', '메세지관리');
+        $scopes[] = \modules\admin\dtos\Scope::init($this)->setScope(
+            'messages',
+            $this->getText('admin.scopes.message')->addChild('view', $this->getText('admin.scopes.view'))
+        );
 
         return $this->setScopes($scopes);
     }
