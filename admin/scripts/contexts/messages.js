@@ -6,13 +6,13 @@
  * @file /modules/sms/admin/scripts/contexts/messages.ts
  * @author youlapark <youlapark@naddle.net>
  * @license MIT License
- * @modified 2024. 10. 15.
+ * @modified 2024. 10. 22.
  */
 Admin.ready(async () => {
     const me = Admin.getModule('sms');
     return new Aui.Tab.Panel({
         id: 'messages-context',
-        title: (await me.getText('admin.contexts.messages')),
+        title: await me.getText('admin.contexts.messages'),
         border: false,
         layout: 'fit',
         iconClass: 'mi mi-mail',
@@ -20,7 +20,7 @@ Admin.ready(async () => {
             new Aui.Form.Field.Search({
                 id: 'keyword',
                 width: 200,
-                emptyText: (await me.getText('admin.keyword')),
+                emptyText: await me.getText('admin.keyword'),
                 handler: async (keyword) => {
                     const context = Aui.getComponent('messages-context');
                     const messages = context.getActiveTab().getItemAt(0);
@@ -67,37 +67,37 @@ Admin.ready(async () => {
                             }),
                             columns: [
                                 {
-                                    text: (await me.getText('admin.columns.receiver')),
+                                    text: await me.getText('admin.columns.receiver'),
                                     dataIndex: 'name',
                                     textAlign: 'center',
                                     width: 120,
                                 },
                                 {
-                                    text: (await me.getText('admin.columns.receiveNumber')),
+                                    text: await me.getText('admin.columns.receiveNumber'),
                                     dataIndex: 'cellphone',
                                     textAlign: 'center',
                                     width: 170,
                                 },
                                 // 발신자에 대해 생각해봐야 함
                                 {
-                                    text: (await me.getText('admin.columns.sender')),
+                                    text: await me.getText('admin.columns.sender'),
                                     dataIndex: 'sender',
                                     width: 120,
                                 },
                                 {
-                                    text: (await me.getText('admin.columns.senderNumber')),
+                                    text: await me.getText('admin.columns.senderNumber'),
                                     dataIndex: 'sended_cellphone',
                                     textAlign: 'center',
                                     width: 170,
                                 },
                                 {
-                                    text: (await me.getText('admin.columns.content')),
+                                    text: await me.getText('admin.columns.content'),
                                     dataIndex: 'content',
                                     minWidth: 250,
                                     flex: 1,
                                 },
                                 {
-                                    text: (await me.getText('admin.columns.date')),
+                                    text: await me.getText('admin.columns.date'),
                                     dataIndex: 'sended_at',
                                     width: 250,
                                     sortable: true,
@@ -107,7 +107,7 @@ Admin.ready(async () => {
                                     },
                                 },
                                 {
-                                    text: (await me.getText('admin.columns.type')),
+                                    text: await me.getText('admin.columns.type'),
                                     dataIndex: 'type',
                                     width: 120,
                                     textAlign: 'center',
@@ -130,7 +130,7 @@ Admin.ready(async () => {
                                     },
                                 },
                                 {
-                                    text: (await me.getText('admin.columns.status')),
+                                    text: await me.getText('admin.columns.status'),
                                     sortable: true,
                                     width: 120,
                                     textAlign: 'center',
