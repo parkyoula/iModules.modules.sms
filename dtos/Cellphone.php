@@ -44,7 +44,7 @@ class Cellphone
     /**
      * 휴대전화번호를 가져온다.
      *
-     * @param string $cellphone
+     * @return string $cellphone
      */
     public function getCellphone(): string
     {
