@@ -13,7 +13,7 @@ Admin.ready(async () => {
 
     return new Aui.Panel({
         id: 'messages-context',
-        title: (await me.getText('admin.contexts.messages')) as string,
+        title: await me.getText('admin.contexts.messages'),
         border: false,
         layout: 'fit',
         iconClass: 'xi xi-letter',
@@ -21,7 +21,7 @@ Admin.ready(async () => {
             new Aui.Form.Field.Search({
                 id: 'keyword',
                 width: 200,
-                emptyText: (await me.getText('admin.keyword')) as string,
+                emptyText: await me.getText('admin.keyword'),
                 handler: async (keyword) => {
                     const context = Aui.getComponent('messages-context') as Aui.Tab.Panel;
                     const messages = context.getItemAt(0) as Aui.Grid.Panel;
