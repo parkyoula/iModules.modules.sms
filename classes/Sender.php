@@ -208,22 +208,25 @@ class Sender
             $this->setType($type);
         }
 
+        $to = $this->_to;
+        $from = $this->_from;
+
         $message_id = \UUID::v1($this->_to->getCellphone());
         $mSms
             ->db()
             ->insert($mSms->table('messages'), [
                 'message_id' => $message_id,
                 'type' => $type,
-                'member_id' => $this->_to->getMemberId(),
-                'cellphone' => $this->_to->getCellphone(),
-                'name' => $this->_to->getName(),
+                'member_id' => $to->getMemberId(),
+                'cellphone' => $to->getCellphone(),
+                'name' => $to->getName(),
                 'component_type' => $this->_component->getType(),
                 'component_name' => $this->_component->getName(),
-                'content' => $this->_content,
-                'sended_cellphone' => $this->_from->getCellphone(),
-                'sended_at' => $sended_at,
+                'sended_cellphone' => $from->getCellphone(),
+                'sended_at' => $sended_at, // 전송시각
                 'status' => $success === true ? 'TRUE' : 'FALSE',
                 'response' => is_bool($success) == false ? \Format::toJson($success) : null,
+                'content' => $this->getContent(),
             ])
             ->execute();
 
