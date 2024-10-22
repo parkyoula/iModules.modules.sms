@@ -10,7 +10,7 @@
  */
 Admin.ready(async () => {
     const me = Admin.getModule('sms');
-    return new Aui.Tab.Panel({
+    return new Aui.Panel({
         id: 'messages-context',
         title: (await me.getText('admin.contexts.messages')),
         border: false,
@@ -36,9 +36,9 @@ Admin.ready(async () => {
         ],
         items: [
             new Aui.Grid.Panel({
-                title: 'SMS관리',
                 layout: 'fit',
                 border: false,
+                flex: 1,
                 selection: { selectable: true, type: 'check', multiple: false },
                 store: new Aui.Store.Remote({
                     url: me.getProcessUrl('messages'),
@@ -48,6 +48,15 @@ Admin.ready(async () => {
                     remoteSort: true,
                     remoteFilter: true,
                 }),
+                bottombar: new Aui.Grid.Pagination([
+                    new Aui.Button({
+                        iconClass: 'mi mi-refresh',
+                        handler: (button) => {
+                            const grid = button.getParent().getParent();
+                            grid.getStore().reload();
+                        },
+                    }),
+                ]),
                 columns: [
                     {
                         text: (await me.getText('admin.columns.receiver')),
@@ -140,14 +149,5 @@ Admin.ready(async () => {
                 },
             }),
         ],
-        reloadAll: async () => {
-            const context = Aui.getComponent('messages-context');
-            const reloads = [];
-            for (const grid of context.getItems()) {
-                reloads.push(grid.getStore().reload());
-            }
-            await Promise.all(reloads);
-        },
     });
 });
-//

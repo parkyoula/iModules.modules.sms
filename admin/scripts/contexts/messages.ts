@@ -11,7 +11,7 @@
 Admin.ready(async () => {
     const me = Admin.getModule('sms') as modules.sms.admin.Sms;
 
-    return new Aui.Tab.Panel({
+    return new Aui.Panel({
         id: 'messages-context',
         title: (await me.getText('admin.contexts.messages')) as string,
         border: false,
@@ -36,9 +36,9 @@ Admin.ready(async () => {
         ],
         items: [
             new Aui.Grid.Panel({
-                title: 'SMS관리',
                 layout: 'fit',
                 border: false,
+                flex: 1,
                 selection: { selectable: true, type: 'check', multiple: false },
                 store: new Aui.Store.Remote({
                     url: me.getProcessUrl('messages'),
@@ -48,6 +48,15 @@ Admin.ready(async () => {
                     remoteSort: true,
                     remoteFilter: true,
                 }),
+                bottombar: new Aui.Grid.Pagination([
+                    new Aui.Button({
+                        iconClass: 'mi mi-refresh',
+                        handler: (button) => {
+                            const grid = button.getParent().getParent() as Aui.Grid.Panel;
+                            grid.getStore().reload();
+                        },
+                    }),
+                ]),
                 columns: [
                     {
                         text: (await me.getText('admin.columns.receiver')) as string,
@@ -140,14 +149,5 @@ Admin.ready(async () => {
                 },
             }),
         ],
-        reloadAll: async () => {
-            const context = Aui.getComponent('messages-context') as Aui.Tab.Panel;
-            const reloads = [];
-            for (const grid of context.getItems() as Aui.Grid.Panel[]) {
-                reloads.push(grid.getStore().reload());
-            }
-            await Promise.all(reloads);
-        },
     });
 });
-//
