@@ -59,12 +59,10 @@ if ($sorters !== null) {
 }
 
 $records = $records->limit($start, $limit)->get();
-
-if ($records === null) {
-    $results->success = true;
-    $results->message = $me->getErrorText('NOT_FOUND_DATA');
-    return;
+foreach ($records as &$record) {
+    //
 }
 
 $results->success = true;
 $results->records = $records;
+$results->total = $total;
