@@ -1,13 +1,13 @@
 <?php
 /**
- * 이 파일은 SMS관리 모듈의 일부입니다. (https://www.coursemos.co.kr)
+ * 이 파일은 아이모듈 SMS모듈의 일부입니다. (https://www.imodules.io)
  *
  * 모듈관리자 클래스를 정의한다.
  *
  * @file /modules/sms/admin/Sms.php
  * @author youlapark <youlapark@naddle.net>
  * @license MIT License
- * @modified 2024. 10. 22.
+ * @modified 2024. 10. 23.
  */
 namespace modules\sms\admin;
 class Sms extends \modules\admin\admin\Component
@@ -24,7 +24,6 @@ class Sms extends \modules\admin\admin\Component
         if ($this->hasPermission('messages') == true) {
             $contexts[] = \modules\admin\dtos\Context::init($this)
                 ->setContext('messages')
-                ->setDefaultFolder(false)
                 ->setTitle($this->getText('admin.scopes.context'), 'xi xi-letter', 1);
         }
 
