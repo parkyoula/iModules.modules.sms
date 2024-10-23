@@ -7,7 +7,7 @@
  * @file /modules/sms/classes/Sender.php
  * @author Arzz <arzz@arzz.com>
  * @license MIT License
- * @modified 2024. 10. 21.
+ * @modified 2024. 10. 23.
  */
 namespace modules\sms;
 class Sender
@@ -43,6 +43,11 @@ class Sender
     private mixed $_extras = null;
 
     /**
+     * @var ?string $_response_id 응답고유값 (응답결과에 따라 추가처리가 필요할 경우 설정)
+     */
+    private ?string $_response_id = null;
+
+    /**
      * SMS 전송자 클래스를 정의한다.
      *
      * @param \Component $component 알림을 전송하는 컴포넌트 객체
@@ -57,7 +62,7 @@ class Sender
      *
      * @param \Component $component 알림을 전송하는 컴포넌트 객체
      */
-    public function getComponent()
+    public function getComponent(): \Component
     {
         return $this->_component;
     }
@@ -174,6 +179,18 @@ class Sender
     }
 
     /**
+     * 응답고유값을 설정한다.
+     *
+     * @params string $response_id 응답고유값
+     * @return \modules\sms\Sender $this
+     */
+    public function setResponseId(?string $response_id): \modules\sms\Sender
+    {
+        $this->_response_id = $response_id;
+        return $this;
+    }
+
+    /**
      * SMS를 전송한다.
      *
      * @param ?int $sended_at - 전송시각(NULL 인 경우 현재시각)
@@ -222,11 +239,13 @@ class Sender
                 'name' => $to->getName(),
                 'component_type' => $this->_component->getType(),
                 'component_name' => $this->_component->getName(),
+                'content' => $this->getContent(),
+                'extras' => $this->_extras !== null ? \Format::toJson($this->_extras) : null,
                 'sended_cellphone' => $from->getCellphone(),
                 'sended_at' => $sended_at,
                 'status' => $success === true ? 'TRUE' : 'FALSE',
                 'response' => is_bool($success) == false ? \Format::toJson($success) : null,
-                'content' => $this->getContent(),
+                'response_id' => $this->_response_id,
             ])
             ->execute();
 
