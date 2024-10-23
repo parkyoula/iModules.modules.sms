@@ -61,7 +61,7 @@ Admin.ready(async () => {
                         text: await me.getText('admin.columns.receiver'),
                         dataIndex: 'sended_by',
                         textAlign: 'center',
-                        width: 120,
+                        width: 150,
                         renderer: (value) => {
                             return me.getMemberName(value);
                         },
@@ -70,18 +70,18 @@ Admin.ready(async () => {
                         text: await me.getText('admin.columns.receiveNumber'),
                         dataIndex: 'cellphone',
                         textAlign: 'center',
-                        width: 170,
+                        width: 150,
                     },
                     {
                         text: await me.getText('admin.columns.sender'),
                         dataIndex: 'sender',
-                        width: 120,
+                        width: 150,
                     },
                     {
                         text: await me.getText('admin.columns.senderNumber'),
                         dataIndex: 'sended_cellphone',
                         textAlign: 'center',
-                        width: 150,
+                        width: 160,
                     },
                     {
                         text: await me.getText('admin.columns.content'),
