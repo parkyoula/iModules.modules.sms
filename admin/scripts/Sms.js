@@ -3,7 +3,7 @@
  *
  * SMS 이벤트를 관리하는 클래스를 정의한다.
  *
- * @file /modules/sms/admin/scripts/message.ts
+ * @file /modules/sms/admin/scripts/Sms.ts
  * @author youlapark <youlapark@naddle.net>
  * @license MIT License
  * @modified 2024. 10. 22.
