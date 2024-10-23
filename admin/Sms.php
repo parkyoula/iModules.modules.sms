@@ -24,7 +24,7 @@ class Sms extends \modules\admin\admin\Component
         if ($this->hasPermission('messages') == true) {
             $contexts[] = \modules\admin\dtos\Context::init($this)
                 ->setContext('messages')
-                ->setTitle($this->getText('admin.scopes.context'), 'xi xi-letter', 1);
+                ->setTitle($this->getText('admin.scopes.context'), 'xi xi-tablet');
         }
 
         return $contexts;
