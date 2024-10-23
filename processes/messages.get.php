@@ -67,3 +67,4 @@ if ($records === null) {
 
 $results->success = true;
 $results->records = $records;
+$results->total = $total;
