@@ -58,27 +58,31 @@ Admin.ready(async () => {
                 ]),
                 columns: [
                     {
-                        text: (await me.getText('admin.columns.receiver')) as string,
-                        dataIndex: 'name',
-                        textAlign: 'center',
-                        width: 120,
-                    },
-                    {
-                        text: (await me.getText('admin.columns.receiveNumber')) as string,
-                        dataIndex: 'cellphone',
-                        textAlign: 'center',
-                        width: 170,
-                    },
-                    {
                         text: (await me.getText('admin.columns.sender')) as string,
-                        dataIndex: 'sender',
-                        width: 120,
+                        dataIndex: 'sended_by',
+                        textAlign: 'center',
+                        width: 160,
+                        renderer: (value) => {
+                            return me.getMemberName(value);
+                        },
                     },
                     {
                         text: (await me.getText('admin.columns.senderNumber')) as string,
+                        dataIndex: 'cellphone',
+                        textAlign: 'center',
+                        width: 150,
+                    },
+                    {
+                        text: (await me.getText('admin.columns.receiver')) as string,
+                        dataIndex: 'sended_name',
+                        textAlign: 'center',
+                        width: 160,
+                    },
+                    {
+                        text: (await me.getText('admin.columns.receiveNumber')) as string,
                         dataIndex: 'sended_cellphone',
                         textAlign: 'center',
-                        width: 170,
+                        width: 150,
                     },
                     {
                         text: (await me.getText('admin.columns.content')) as string,

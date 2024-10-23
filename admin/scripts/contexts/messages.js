@@ -58,27 +58,31 @@ Admin.ready(async () => {
                 ]),
                 columns: [
                     {
-                        text: (await me.getText('admin.columns.receiver')),
-                        dataIndex: 'name',
-                        textAlign: 'center',
-                        width: 120,
-                    },
-                    {
-                        text: (await me.getText('admin.columns.receiveNumber')),
-                        dataIndex: 'cellphone',
-                        textAlign: 'center',
-                        width: 170,
-                    },
-                    {
                         text: (await me.getText('admin.columns.sender')),
-                        dataIndex: 'sender',
-                        width: 120,
+                        dataIndex: 'sended_by',
+                        textAlign: 'center',
+                        width: 160,
+                        renderer: (value) => {
+                            return me.getMemberName(value);
+                        },
                     },
                     {
                         text: (await me.getText('admin.columns.senderNumber')),
+                        dataIndex: 'cellphone',
+                        textAlign: 'center',
+                        width: 150,
+                    },
+                    {
+                        text: (await me.getText('admin.columns.receiver')),
+                        dataIndex: 'sended_name',
+                        textAlign: 'center',
+                        width: 160,
+                    },
+                    {
+                        text: (await me.getText('admin.columns.receiveNumber')),
                         dataIndex: 'sended_cellphone',
                         textAlign: 'center',
-                        width: 170,
+                        width: 150,
                     },
                     {
                         text: (await me.getText('admin.columns.content')),
