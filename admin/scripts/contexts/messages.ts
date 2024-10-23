@@ -16,7 +16,7 @@ Admin.ready(async () => {
         title: await me.getText('admin.contexts.messages'),
         border: false,
         layout: 'fit',
-        iconClass: 'xi xi-letter',
+        iconClass: 'xi xi-tablet',
         topbar: [
             new Aui.Form.Field.Search({
                 id: 'keyword',
