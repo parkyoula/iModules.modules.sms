@@ -59,36 +59,36 @@ Admin.ready(async () => {
                 ]),
                 columns: [
                     {
-                        text: (await me.getText('admin.columns.receiver')) as string,
+                        text: await me.getText('admin.columns.receiver'),
                         dataIndex: 'name',
                         textAlign: 'center',
                         width: 120,
                     },
                     {
-                        text: (await me.getText('admin.columns.receiveNumber')) as string,
+                        text: await me.getText('admin.columns.receiveNumber'),
                         dataIndex: 'cellphone',
                         textAlign: 'center',
                         width: 170,
                     },
                     {
-                        text: (await me.getText('admin.columns.sender')) as string,
+                        text: await me.getText('admin.columns.sender'),
                         dataIndex: 'sender',
                         width: 120,
                     },
                     {
-                        text: (await me.getText('admin.columns.senderNumber')) as string,
+                        text: await me.getText('admin.columns.senderNumber'),
                         dataIndex: 'sended_cellphone',
                         textAlign: 'center',
                         width: 170,
                     },
                     {
-                        text: (await me.getText('admin.columns.content')) as string,
+                        text: await me.getText('admin.columns.content'),
                         dataIndex: 'content',
                         minWidth: 250,
                         flex: 1,
                     },
                     {
-                        text: (await me.getText('admin.columns.date')) as string,
+                        text: await me.getText('admin.columns.date'),
                         dataIndex: 'sended_at',
                         width: 250,
                         sortable: true,
@@ -98,7 +98,7 @@ Admin.ready(async () => {
                         },
                     },
                     {
-                        text: (await me.getText('admin.columns.type')) as string,
+                        text: await me.getText('admin.columns.type'),
                         dataIndex: 'type',
                         width: 120,
                         textAlign: 'center',
@@ -109,7 +109,7 @@ Admin.ready(async () => {
                                 records: [
                                     ['SMS', 'SMS'],
                                     ['LMS', 'LMS'],
-                                    [(await me.getText('admin.filter.types.KAKAO')) as string, 'KAKAO'],
+                                    [await me.getText('admin.filter.types.KAKAO'), 'KAKAO'],
                                 ],
                             }),
                             displayField: 'display',
@@ -121,7 +121,7 @@ Admin.ready(async () => {
                         },
                     },
                     {
-                        text: (await me.getText('admin.columns.status')) as string,
+                        text: await me.getText('admin.columns.status'),
                         sortable: true,
                         width: 120,
                         textAlign: 'center',
@@ -130,8 +130,8 @@ Admin.ready(async () => {
                             store: new Aui.Store.Local({
                                 fields: ['display', 'value'],
                                 records: [
-                                    [(await me.getText('admin.filter.status.TRUE')) as string, 'TRUE'],
-                                    [(await me.getText('admin.filter.status.FALSE')) as string, 'FALSE'],
+                                    [await me.getText('admin.filter.status.TRUE'), 'TRUE'],
+                                    [await me.getText('admin.filter.status.FALSE'), 'FALSE'],
                                 ],
                             }),
                         }),
