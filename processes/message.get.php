@@ -2,9 +2,9 @@
 /**
  * 이 파일은 아이모듈 SMS모듈의 일부입니다. (https://www.imodules.io)
  *
- * SMS 발송 목록을 가져온다.
+ * SMS 발송기록을 가져온다.
  *
- * @file /modules/sms/processes/messages.get.php
+ * @file /modules/sms/processes/message.get.php
  * @author youlapark <youlapark@naddle.net>
  * @license MIT License
  * @modified 2024. 10. 16.
