@@ -65,6 +65,12 @@ if ($records === null) {
     return;
 }
 
+foreach ($records as &$record) {
+    // @todo 회원 프로필 사진 기본 사진으로 수정
+    $cellPhone = new \modules\sms\dtos\Cellphone($record->cellphone, $record->name, $record->member_id);
+    $record->sended_by = $cellPhone->getJson();
+}
+
 $results->success = true;
 $results->records = $records;
 $results->total = $total;
