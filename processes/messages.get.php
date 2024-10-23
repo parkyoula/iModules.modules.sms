@@ -7,7 +7,7 @@
  * @file /modules/sms/processes/messages.get.php
  * @author youlapark <youlapark@naddle.net>
  * @license MIT License
- * @modified 2024. 10. 15.
+ * @modified 2024. 10. 23.
  *
  * @var \modules\sms\Sms $me
  */
@@ -22,9 +22,10 @@ if ($me->getAdmin()->checkPermission('messages') == false) {
     $results->message = $me->getErrorText('FORBIDDEN');
     return;
 }
-$sorters = Request::getJson('sorters');
+
 $start = Request::getInt('start') ?? 0;
 $limit = Request::getInt('limit') ?? 50;
+$sorters = Request::getJson('sorters');
 $filters = Request::getJson('filters');
 $keyword = Request::get('keyword');
 

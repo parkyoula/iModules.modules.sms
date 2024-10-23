@@ -1,12 +1,12 @@
 /**
- * 이 파일은 SMS 모듈의 일부입니다. (https://www.coursemos.co.kr)
+ * 이 파일은 아이모듈 SMS모듈의 일부입니다. (https://www.imodules.io)
  *
  * SMS 모듈의 관리자 스타일시트를 정의한다.
  *
- * @file /modules/naddle/sms/admin/styles/Sms.css
+ * @file /modules/sms/admin/styles/Sms.css
  * @author youlapark <youlapark@naddle.net>
  * @license MIT License
- * @modified 2024. 10. 15.
+ * @modified 2024. 10. 23.
  */
 div[data-component='messages-context'][data-type='panel'][data-role='panel'] {
     div[data-role='content'] {
